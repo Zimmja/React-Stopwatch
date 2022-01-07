@@ -2,6 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Setup
+
+1. Ran `npx create-react-app react-timer` to create a new react-timer repository containing my React app
+2. Ran `npm start` in the root directory to run the app (fo rviewing in browser)
+
+## Process
+
+1. To begin, I learned how to create a simple stomwatch with this tutorial: [How to Build a Stopwatch Timer using React Hooks](https://www.youtube.com/watch?v=sSWGdj8a5Fs&ab_channel=CodeBoost)
+
 ## Available Scripts
 
 In the project directory, you can run:
