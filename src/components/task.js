@@ -2,10 +2,6 @@ import React from "react";
 import "./task.css";
 
 export default class Task extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleClick = () => this.props.onClick(this.props.index);
 
   hours = () => this.fTime(parseInt(this.props.timer / 3600000) % 24);

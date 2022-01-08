@@ -13,31 +13,45 @@ class Page extends React.Component {
     this.state = {
       times: [1000 * 67, 0],
       timer: 0,
-      update: null,
+      activeLoop: null,
     };
   }
 
-  handleClick = () => (this.timerOn() ? this.pauseTimer() : this.startTimer());
+  // handleClick = () => (this.timerOn() ? this.pauseTimer() : this.startTimer());
+  // timerOn = () => !!this.state.activeLoop;
 
-  startTimer = () => this.setState({ update: this.updateTimeLoop() });
+  startTimer = () => this.setState({ activeLoop: this.incTimerLoop() });
 
   pauseTimer = () => {
-    clearInterval(this.state.update);
-    this.setState({ update: null });
+    clearInterval(this.state.activeLoop);
+    this.setState({ activeLoop: null });
   };
 
-  updateTimeLoop = () =>
+  incTimerLoop = () =>
     setInterval(() => {
       this.incTimer(this.timeInterval);
     }, this.timeInterval);
-
-  timerOn = () => !!this.state.update;
 
   incTimer = (val = 0) => {
     const newTime = this.state.timer + val;
     const timesArr = this.state.times.slice();
     timesArr[this.currentTask] = newTime;
     this.setState({ timer: newTime, times: timesArr });
+  };
+
+  selectTask = (i) =>
+    i === this.currentTask ? this.stopTimer() : this.startNewTimer(i);
+
+  stopTimer = () => {
+    this.pauseTimer();
+    this.currentTask = -1;
+  };
+
+  startNewTimer = (i) => {
+    this.pauseTimer();
+    this.setState({ timer: this.state.times[i] });
+    this.currentTask = i;
+    this.startTimer();
   };
 
   renderAllTasks = () =>
@@ -51,17 +65,6 @@ class Page extends React.Component {
       onClick={(i) => this.selectTask(i)}
     />
   );
-
-  selectTask = (i) => {
-    if (i === this.currentTask) {
-      this.handleClick();
-    } else {
-      this.pauseTimer();
-      this.setState({ timer: this.state.times[i] });
-      this.currentTask = i;
-      this.startTimer();
-    }
-  };
 
   render() {
     return (
