@@ -1,5 +1,6 @@
 import React from "react";
 import "./task.css";
+import Stopwatch from "./stopwatch.js";
 
 export default class Task extends React.Component {
   handleClick = () => this.props.onClick(this.props.index);
@@ -12,10 +13,14 @@ export default class Task extends React.Component {
   render() {
     return (
       <div className="task">
-        <button
-          className="stopwatch"
-          onClick={() => this.handleClick()}
-        >{`${this.hours()}:${this.minutes()}:${this.seconds()}`}</button>
+        <button className="stopwatch" onClick={() => this.handleClick()}>
+          <Stopwatch
+            key={`stopwatch${this.props.index}`}
+            timer={this.props.timer}
+            index={this.props.index}
+            onClick={(i) => this.selectTask(i)}
+          />
+        </button>
       </div>
     );
   }
