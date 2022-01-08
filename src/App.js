@@ -1,55 +1,72 @@
 import React from "react";
 import "./App.css";
+import Task from "./components/task.js";
 
-function App() {
-  const [time, setTime] = React.useState(0);
-  const [timerOn, setTimerOn] = React.useState(false);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.timeInterval = 1000;
+    this.currentTask = -1;
+    this.state = {
+      times: [1000 * 67, 0, 1000 * 1028, 1000 * 54302],
+      activeLoop: null,
+    };
+  }
 
-  let appTime = 0;
-  let appTimerOn = false;
+  startTimer = () => this.setState({ activeLoop: this.incTimerLoop() });
 
-  // This function is called whenever the timerOn state variable changes
-  React.useEffect(() => {
-    let interval = null;
-    let timeInterval = 10;
+  pauseTimer = () => {
+    clearInterval(this.state.activeLoop);
+    this.setState({ activeLoop: null });
+  };
 
-    if (timerOn) {
-      // When timer is turned on
-      interval = setInterval(() => {
-        setTime((prevTime) => prevTime + timeInterval);
-      }, timeInterval);
-    } else {
-      // When timer is turned off
-      clearInterval(interval);
-    }
+  incTimerLoop = () =>
+    setInterval(() => {
+      this.incTimer(this.timeInterval);
+    }, this.timeInterval);
 
-    // Not necessary, but just makes extra sure this doesn't keep running when the user leaves the page
-    return () => clearInterval(interval);
-  }, [timerOn]);
+  incTimer = (val = 0) => {
+    const newTime = this.currentTimer() + val;
+    const timesArr = this.state.times.slice();
+    timesArr[this.currentTask] = newTime;
+    this.setState({ times: timesArr });
+  };
 
-  const formatTime = (time) => (time < 10 ? `0${time}` : `${time}`);
+  selectTask = (i) =>
+    i === this.currentTask ? this.stopTimer() : this.startNewTimer(i);
 
-  return (
-    <div className="App">
-      <div>
-        <p>Hours: {formatTime(parseInt(time / 3600000) % 24)}</p>
-        <p>Minutes: {formatTime(parseInt(time / 60000) % 60)}</p>
-        <p>Seconds: {formatTime(parseInt(time / 1000) % 60)}</p>
-      </div>
-      <div>
-        {!timerOn && time === 0 && (
-          <button onClick={() => setTimerOn(true)}>Start</button>
-        )}
-        {!timerOn && time !== 0 && (
-          <button onClick={() => setTimerOn(true)}>Resume</button>
-        )}
-        {timerOn && <button onClick={() => setTimerOn(false)}>Pause</button>}
-        {!timerOn && time !== 0 && (
-          <button onClick={() => setTime(0)}>Reset</button>
-        )}
-      </div>
-    </div>
+  stopTimer = () => {
+    this.pauseTimer();
+    this.currentTask = -1;
+  };
+
+  startNewTimer = (i) => {
+    this.pauseTimer();
+    this.currentTask = i;
+    this.startTimer();
+  };
+
+  currentTimer = (i = this.currentTask) => this.state.times[i];
+
+  renderAllTasks = () =>
+    this.state.times.map((task, i) => this.renderTask(task, i));
+
+  renderTask = (time, ind) => (
+    <Task
+      key={`task${ind}`}
+      timer={time}
+      index={ind}
+      onClick={(i) => this.selectTask(i)}
+    />
   );
+
+  render() {
+    return (
+      <div className="taskboard">
+        <ul className="tasksList">{this.renderAllTasks()}</ul>
+      </div>
+    );
+  }
 }
 
 export default App;
