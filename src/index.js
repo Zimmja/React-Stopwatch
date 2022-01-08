@@ -12,13 +12,9 @@ class Page extends React.Component {
     this.currentTask = -1;
     this.state = {
       times: [1000 * 67, 0],
-      timer: 0,
       activeLoop: null,
     };
   }
-
-  // handleClick = () => (this.timerOn() ? this.pauseTimer() : this.startTimer());
-  // timerOn = () => !!this.state.activeLoop;
 
   startTimer = () => this.setState({ activeLoop: this.incTimerLoop() });
 
@@ -33,10 +29,10 @@ class Page extends React.Component {
     }, this.timeInterval);
 
   incTimer = (val = 0) => {
-    const newTime = this.state.timer + val;
+    const newTime = this.currentTimer() + val;
     const timesArr = this.state.times.slice();
     timesArr[this.currentTask] = newTime;
-    this.setState({ timer: newTime, times: timesArr });
+    this.setState({ times: timesArr });
   };
 
   selectTask = (i) =>
@@ -49,10 +45,11 @@ class Page extends React.Component {
 
   startNewTimer = (i) => {
     this.pauseTimer();
-    this.setState({ timer: this.state.times[i] });
     this.currentTask = i;
     this.startTimer();
   };
+
+  currentTimer = (i = this.currentTask) => this.state.times[i];
 
   renderAllTasks = () =>
     this.state.times.map((task, i) => this.renderTask(task, i));
