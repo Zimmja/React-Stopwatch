@@ -8,7 +8,7 @@ class App extends React.Component {
     this.timeInterval = 1000;
     this.currentTask = -1;
     this.state = {
-      times: [1000 * 67, 0, 1000 * 1028, 1000 * 54302],
+      times: [1000 * 67, 1000 * 1028, 1000 * 54302],
       activeLoop: null,
     };
   }
@@ -27,10 +27,12 @@ class App extends React.Component {
 
   incTimer = (val = 0) => {
     const newTime = this.currentTimer() + val;
-    const timesArr = this.state.times.slice();
+    const timesArr = this.copyTimesArr();
     timesArr[this.currentTask] = newTime;
     this.setState({ times: timesArr });
   };
+
+  copyTimesArr = () => this.state.times.slice();
 
   selectTask = (i) =>
     i === this.currentTask ? this.stopTimer() : this.startNewTimer(i);
@@ -60,10 +62,19 @@ class App extends React.Component {
     />
   );
 
+  addTask = () => {
+    const timesArr = this.copyTimesArr();
+    timesArr.push(0);
+    this.setState({ times: timesArr });
+  };
+
   render() {
     return (
       <div className="taskboard">
         <ul className="tasksList">{this.renderAllTasks()}</ul>
+        <button className="addTaskButton" onClick={() => this.addTask()}>
+          Add
+        </button>
       </div>
     );
   }
