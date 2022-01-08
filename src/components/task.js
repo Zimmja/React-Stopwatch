@@ -6,9 +6,11 @@ export default class Task extends React.Component {
   handleSWClick = () => this.props.onSWClick(this.props.index);
   handleDClick = () => this.props.onDClick(this.props.index);
 
+  activeState = () => (this.props.active ? "taskActive" : "taskInactive");
+
   render() {
     return (
-      <div className="task">
+      <div className={this.activeState()}>
         <button className="stopwatch" onClick={() => this.handleSWClick()}>
           <Stopwatch
             key={`stopwatch${this.props.index}`}
@@ -16,8 +18,8 @@ export default class Task extends React.Component {
             index={this.props.index}
           />
         </button>
-        <button className="deleteButton" onClick={() => this.handleDClick()}>
-          Delete
+        <button className="delete" onClick={() => this.handleDClick()}>
+          X
         </button>
       </div>
     );
