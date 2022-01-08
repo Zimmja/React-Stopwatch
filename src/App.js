@@ -9,10 +9,11 @@ class App extends React.Component {
     this.currentTask = -1;
     this.state = {
       tasks: [
-        { description: "Task 1", value: 0, visible: true },
-        { description: "Task 2", value: 0, visible: true },
-        { description: "Task 3", value: 0, visible: true },
+        { description: "Break", value: 0, visible: true },
+        { description: "Administration", value: 0, visible: true },
+        { description: "Meetings", value: 0, visible: true },
       ],
+      hidden: [],
       activeLoop: null,
     };
   }
@@ -52,6 +53,8 @@ class App extends React.Component {
 
   copyTasksArr = () => this.state.tasks.slice();
 
+  copyHiddenArr = () => this.state.hidden.slice();
+
   currentTimer = (i = this.currentTask) => this.state.tasks[i].value;
 
   renderAllTasks = () =>
@@ -69,8 +72,17 @@ class App extends React.Component {
 
   deleteTask = (i) => {
     const tasksArr = this.copyTasksArr();
+    const hiddenArr = this.copyHiddenArr();
     tasksArr[i].visible = false;
-    this.setState({ tasks: tasksArr });
+    hiddenArr.push(tasksArr[i]);
+    this.setState({ tasks: tasksArr, hidden: hiddenArr });
+  };
+
+  unhideTask = () => {
+    const hiddenArr = this.copyHiddenArr();
+    const unhidden = hiddenArr.pop();
+    unhidden.visible = true;
+    this.setState({ hidden: hiddenArr });
   };
 
   renderTask = (task, ind) => {
@@ -89,11 +101,21 @@ class App extends React.Component {
       );
   };
 
+  unhideButtonFormat = () =>
+    this.state.hidden.length > 0 ? "unhideActive" : "unhideInactive";
+
   render() {
     return (
       <div className="taskboard">
         <button id="addTaskButton" onClick={() => this.addTask()}>
           +
+        </button>
+        <button
+          class={this.unhideButtonFormat()}
+          id="unhideButton"
+          onClick={() => this.unhideTask()}
+        >
+          {"<"}
         </button>
         <div className="tasksList">{this.renderAllTasks()}</div>
       </div>

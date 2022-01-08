@@ -8,14 +8,29 @@
   width: 70%;
 }
 
-#addTaskButton {
+#addTaskButton,
+#unhideButton {
   width: 50px;
-  background-color: rgba(8, 104, 28, 0.5);
   height: 100%;
+  margin: 0 5px;
   border-radius: 200px;
   border-color: black;
-  color: white;
   font-weight: bold;
   font-size: 40px;
   cursor: pointer;
+}
+
+#addTaskButton {
+  color: white;
+  background-color: rgba(8, 104, 28, 0.5);
+}
+
+.unhideActive {
+  color: white;
+  background-color: rgba(155, 163, 42, 0.5);
+}
+
+.unhideInactive {
+  color: slategray;
+  background-color: rgb(124, 160, 148);
 }
