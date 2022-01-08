@@ -8,6 +8,7 @@ class App extends React.Component {
     this.timeInterval = 1000;
     this.currentTask = -1;
     this.state = {
+      tasks: ["Task 1", "Task 2", "Task 3"],
       times: [1000 * 67, 1000 * 1028, 1000 * 54302],
       activeLoop: null,
     };
@@ -58,7 +59,9 @@ class App extends React.Component {
       key={`task${ind}`}
       timer={time}
       index={ind}
-      onClick={(i) => this.selectTask(i)}
+      active={ind == this.currentTask}
+      onSWClick={(i) => this.selectTask(i)}
+      onDClick={(i) => this.deleteTask(i)}
     />
   );
 
@@ -68,13 +71,20 @@ class App extends React.Component {
     this.setState({ times: timesArr });
   };
 
+  deleteTask = (i) => {
+    const timesArr = this.copyTimesArr();
+    timesArr.splice(i, 1);
+    this.setState({ times: timesArr });
+    if (i <= this.currentTask) this.currentTask -= 1;
+  };
+
   render() {
     return (
       <div className="taskboard">
-        <ul className="tasksList">{this.renderAllTasks()}</ul>
-        <button className="addTaskButton" onClick={() => this.addTask()}>
-          Add
+        <button id="addTaskButton" onClick={() => this.addTask()}>
+          +
         </button>
+        <div className="tasksList">{this.renderAllTasks()}</div>
       </div>
     );
   }

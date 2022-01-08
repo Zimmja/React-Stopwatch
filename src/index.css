@@ -12,10 +12,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-.taskboard {
-  text-align: center;
-  margin: 5% auto;
-  width: 50%;
-  background-color: rgb(172, 0, 0);
-}
