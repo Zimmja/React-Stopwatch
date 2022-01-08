@@ -2,7 +2,7 @@
 .taskActive {
   padding: 5px;
   margin: 15px auto;
-  width: 400px;
+  width: 420px;
   min-width: 100px;
   height: 40px;
   border-radius: 100px;
@@ -17,13 +17,13 @@
 }
 
 .description {
-  height: 100%;
+  height: 80%;
+  padding-left: 10px;
   border-radius: 200px;
   border-color: #000000;
   color: rgb(16, 56, 41);
   font-weight: bold;
   font-size: large;
-  cursor: pointer;
   width: 200px;
   background-color: rgba(255, 255, 255, 0.85);
 }

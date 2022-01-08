@@ -11,15 +11,23 @@ export default class Task extends React.Component {
   }
 
   handleSWClick = () => this.props.onSWClick(this.props.index);
+
   handleDClick = () => this.props.onDClick(this.props.index);
-  // handleChange = (event) => this.setState({ description: event.target.value });
 
   activeState = () => (this.props.active ? "taskActive" : "taskInactive");
+
+  updateDescription = (event) =>
+    this.setState({ description: event.target.value });
 
   render() {
     return (
       <div className={this.activeState()}>
-        <button className="description">{this.props.description}</button>
+        <input
+          className="description"
+          type="text"
+          value={this.state.description}
+          onChange={this.updateDescription}
+        />
         <button className="stopwatch" onClick={() => this.handleSWClick()}>
           <Stopwatch
             key={`stopwatch${this.props.index}`}
