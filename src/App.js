@@ -8,8 +8,11 @@ class App extends React.Component {
     this.timeInterval = 1000;
     this.currentTask = -1;
     this.state = {
-      tasks: ["Task 1", "Task 2", "Task 3"],
-      times: [1000 * 67, 1000 * 1028, 1000 * 54302],
+      tasks: [
+        { description: "Task 1", value: 0, visible: true },
+        { description: "Task 2", value: 0, visible: true },
+        { description: "Task 3", value: 0, visible: true },
+      ],
       activeLoop: null,
     };
   }
@@ -28,12 +31,10 @@ class App extends React.Component {
 
   incTimer = (val = 0) => {
     const newTime = this.currentTimer() + val;
-    const timesArr = this.copyTimesArr();
-    timesArr[this.currentTask] = newTime;
-    this.setState({ times: timesArr });
+    const tasksArr = this.copyTasksArr();
+    tasksArr[this.currentTask].value = newTime;
+    this.setState({ tasks: tasksArr });
   };
-
-  copyTimesArr = () => this.state.times.slice();
 
   selectTask = (i) =>
     i === this.currentTask ? this.stopTimer() : this.startNewTimer(i);
@@ -49,33 +50,43 @@ class App extends React.Component {
     this.startTimer();
   };
 
-  currentTimer = (i = this.currentTask) => this.state.times[i];
+  copyTasksArr = () => this.state.tasks.slice();
+
+  currentTimer = (i = this.currentTask) => this.state.tasks[i].value;
 
   renderAllTasks = () =>
-    this.state.times.map((task, i) => this.renderTask(task, i));
-
-  renderTask = (time, ind) => (
-    <Task
-      key={`task${ind}`}
-      timer={time}
-      index={ind}
-      active={ind == this.currentTask}
-      onSWClick={(i) => this.selectTask(i)}
-      onDClick={(i) => this.deleteTask(i)}
-    />
-  );
+    this.state.tasks.map((task, i) => this.renderTask(task, i));
 
   addTask = () => {
-    const timesArr = this.copyTimesArr();
-    timesArr.push(0);
-    this.setState({ times: timesArr });
+    const tasksArr = this.copyTasksArr();
+    tasksArr.push({
+      description: `Task ${tasksArr.length + 1}`,
+      value: 0,
+      visible: true,
+    });
+    this.setState({ tasks: tasksArr });
   };
 
   deleteTask = (i) => {
-    const timesArr = this.copyTimesArr();
-    timesArr.splice(i, 1);
-    this.setState({ times: timesArr });
-    if (i <= this.currentTask) this.currentTask -= 1;
+    const tasksArr = this.copyTasksArr();
+    tasksArr[i].visible = false;
+    this.setState({ tasks: tasksArr });
+  };
+
+  renderTask = (task, ind) => {
+    if (task.visible)
+      return (
+        <Task
+          key={`task${ind}`}
+          timer={task.value}
+          description={task.description}
+          index={ind}
+          active={ind === this.currentTask}
+          onSWClick={(i) => this.selectTask(i)}
+          onDClick={(i) => this.deleteTask(i)}
+          onEdit={(i) => this.shout(i)}
+        />
+      );
   };
 
   render() {

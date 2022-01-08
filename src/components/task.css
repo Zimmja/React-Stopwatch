@@ -2,7 +2,7 @@
 .taskActive {
   padding: 5px;
   margin: 15px auto;
-  width: 80%;
+  width: 400px;
   min-width: 100px;
   height: 40px;
   border-radius: 100px;
@@ -14,6 +14,18 @@
 
 .taskInactive {
   background-color: rgba(28, 51, 45, 0.5);
+}
+
+.description {
+  height: 100%;
+  border-radius: 200px;
+  border-color: #000000;
+  color: rgb(16, 56, 41);
+  font-weight: bold;
+  font-size: large;
+  cursor: pointer;
+  width: 200px;
+  background-color: rgba(255, 255, 255, 0.85);
 }
 
 .stopwatch,
@@ -31,7 +43,7 @@
   width: 100px;
   background-color: rgba(28, 51, 45, 0.5);
   margin-right: 30px;
-  margin-left: 70px;
+  margin-left: 30px;
 }
 
 .delete {
