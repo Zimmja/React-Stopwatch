@@ -8,6 +8,7 @@ import {
   unhideTask,
   resetTask,
   tasksTotal,
+  deleteHiddenTasks,
 } from "./helpers/appTasks.js";
 import iconUndo from "./media/iconUndo.png";
 import iconAdd from "./media/iconAdd.png";
@@ -25,6 +26,7 @@ class App extends React.Component {
         { description: "Meetings", value: 0, visible: true },
       ],
       hidden: [],
+      taskMax: 3,
       activeLoop: null,
     };
   }
@@ -51,12 +53,16 @@ class App extends React.Component {
   // ---------------------------
   unhideTask = () => unhideTask(this.arrHidden(), this.reState);
 
-  addTask = () => addTask(this.arrTasks(), this.reState);
+  addTask = () => addTask(this.arrTasks(), this.state.taskMax, this.reState);
 
   resetTask = (i) => resetTask(i, this.arrTasks(), this.reState);
 
   hideTask = (i) =>
     hideTask(i, this.arrTasks(), this.arrHidden(), this.reState);
+
+  deleteHiddenTasks = () => {
+    deleteHiddenTasks(this.arrTasks(), this.arrHidden(), this.reState);
+  };
 
   // ---------------------------
   // TIMER MANAGEMENT
@@ -118,29 +124,29 @@ class App extends React.Component {
   renderTaskButtons = () => {
     return (
       <div>
-        {this.renderClearButton()}
+        {this.renderDeleteButton()}
         <button id="addTaskButton" onClick={() => this.addTask()}>
           <img className="appIcon" src={iconAdd} alt="Add task" />
         </button>
-        {this.renderUndoButton()}
+        {this.renderUnhideButton()}
       </div>
     );
   };
 
-  renderClearButton = () => {
+  renderDeleteButton = () => {
     if (this.state.hidden.length > 0)
       return (
-        <button id="unhideButton" onClick={() => this.unhideTask()}>
-          <img className="appIcon" src={iconBin} alt="Forget deleted tasks" />
+        <button id="unhideButton" onClick={() => this.deleteHiddenTasks()}>
+          <img className="appIcon" src={iconBin} alt="Delete hidden tasks" />
         </button>
       );
   };
 
-  renderUndoButton = () => {
+  renderUnhideButton = () => {
     if (this.state.hidden.length > 0)
       return (
         <button id="unhideButton" onClick={() => this.unhideTask()}>
-          <img className="appIcon" src={iconUndo} alt="Undelete task" />
+          <img className="appIcon" src={iconUndo} alt="Unhide task" />
         </button>
       );
   };

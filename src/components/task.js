@@ -43,7 +43,7 @@ export default class Task extends React.Component {
             <img className="butIcon" src={iconZero} alt="Reset timer" />
           </button>
           <button className="delete" onClick={() => this.handleDClick()}>
-            <img className="butIcon" src={iconCross} alt="Exit" />
+            <img className="butIcon" src={iconCross} alt="Hide task" />
           </button>
         </div>
       </div>

@@ -1,10 +1,11 @@
-const addTask = (tasksArr, updateFunction) => {
+const addTask = (tasksArr, taskMax, updateFunction) => {
+  const newMax = taskMax + 1;
   tasksArr.push({
-    description: `Task ${tasksArr.length + 1}`,
+    description: `Task ${newMax}`,
     value: 0,
     visible: true,
   });
-  updateFunction({ tasks: tasksArr });
+  updateFunction({ tasks: tasksArr, taskMax: newMax });
 };
 
 const hideTask = (i, tasksArr, hiddenArr, updateFunction) => {
@@ -29,4 +30,19 @@ const tasksTotal = (tasksArr) => {
   return taskVals.reduce((pre, pos) => pre + pos);
 };
 
-module.exports = { addTask, hideTask, unhideTask, resetTask, tasksTotal };
+const deleteHiddenTasks = (tasksArr, hiddenArr, updateFunction) => {
+  while (hiddenArr.length > 0) {
+    tasksArr.splice(tasksArr.indexOf(hiddenArr[0]), 1);
+    hiddenArr.shift();
+  }
+  updateFunction({ tasks: tasksArr, hidden: hiddenArr });
+};
+
+module.exports = {
+  addTask,
+  hideTask,
+  unhideTask,
+  resetTask,
+  tasksTotal,
+  deleteHiddenTasks,
+};
