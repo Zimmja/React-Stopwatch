@@ -2,14 +2,7 @@ import React from "react";
 import "./App.css";
 import Task from "./components/task.js";
 import Stopwatch from "./components/stopwatch.js";
-import {
-  addTask,
-  hideTask,
-  unhideTask,
-  resetTask,
-  tasksTotal,
-  deleteHiddenTasks,
-} from "./helpers/appTasks.js";
+import appTasks from "./helpers/appTasks.js";
 import iconUndo from "./media/iconUndo.png";
 import iconAdd from "./media/iconAdd.png";
 import iconBin from "./media/iconBin.png";
@@ -45,24 +38,36 @@ class App extends React.Component {
     return arrs[i];
   };
 
-  selectTask = (i) =>
-    i === this.currentTask ? this.stopTimer() : this.startNewTimer(i);
-
   // ---------------------------
   // TASK MANAGEMENT
   // ---------------------------
-  unhideTask = () => unhideTask(this.arrHidden(), this.reState);
+  unhideTask() {
+    appTasks.unhideTask(this.arrHidden(), this.reState);
+  }
 
-  addTask = () => addTask(this.arrTasks(), this.state.taskMax, this.reState);
+  addTask() {
+    appTasks.addTask(this.arrTasks(), this.state.taskMax, this.reState);
+  }
 
-  resetTask = (i) => resetTask(i, this.arrTasks(), this.reState);
+  resetTask(i) {
+    appTasks.resetTask(i, this.arrTasks(), this.reState);
+  }
 
-  hideTask = (i) =>
-    hideTask(i, this.arrTasks(), this.arrHidden(), this.reState);
+  hideTask(i) {
+    appTasks.hideTask(i, this.arrTasks(), this.arrHidden(), this.reState);
+  }
 
-  deleteHiddenTasks = () => {
-    deleteHiddenTasks(this.arrTasks(), this.arrHidden(), this.reState);
-  };
+  deleteHiddenTasks() {
+    appTasks.deleteHiddenTasks(this.arrTasks(), this.arrHidden(), this.reState);
+  }
+
+  tasksTotal() {
+    return appTasks.tasksTotal(this.arrTasks());
+  }
+
+  selectTask(i) {
+    i === this.currentTask ? this.stopTimer() : this.startNewTimer(i);
+  }
 
   // ---------------------------
   // TIMER MANAGEMENT
@@ -155,7 +160,7 @@ class App extends React.Component {
     return (
       <div className="taskboard">
         <div class="totalTimer">
-          <Stopwatch timer={tasksTotal(this.arrTasks())} />
+          <Stopwatch timer={this.tasksTotal()} />
         </div>
         <div className="tasksList">{this.renderAllTasks()}</div>
         <div className="taskButtons">{this.renderTaskButtons()}</div>

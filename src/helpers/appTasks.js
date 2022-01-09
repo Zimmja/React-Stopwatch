@@ -38,7 +38,7 @@ const deleteHiddenTasks = (tasksArr, hiddenArr, updateFunction) => {
   updateFunction({ tasks: tasksArr, hidden: hiddenArr });
 };
 
-module.exports = {
+const appTasks = {
   addTask,
   hideTask,
   unhideTask,
@@ -46,3 +46,5 @@ module.exports = {
   tasksTotal,
   deleteHiddenTasks,
 };
+
+module.exports = appTasks;
