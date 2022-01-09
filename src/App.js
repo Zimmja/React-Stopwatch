@@ -45,8 +45,10 @@ class App extends React.Component {
   hideTask = (i) =>
     appTasks.hideTask(i, this.arrTasks(), this.arrHidden(), this.reState);
 
-  deleteHiddenTasks = () =>
+  deleteHiddenTasks = () => {
     appTasks.deleteHiddenTasks(this.arrTasks(), this.arrHidden(), this.reState);
+    // console.log(`Tasks: ${this.state.tasks.map((task) => task.description)}`);
+  };
 
   resetTask = (i) => appTasks.resetTask(i, this.arrTasks(), this.reState);
 
@@ -107,10 +109,15 @@ class App extends React.Component {
   // ---------------------------
   // RENDER MANAGEMENT
   // ---------------------------
-  renderAllTasks = () =>
-    this.state.tasks.map((task, i) => this.renderTask(task, i));
+  renderAllTasks = () => {
+    // console.log(
+    //   `Rendering: ${this.state.tasks.map((task) => task.description)}`
+    // );
+    return this.state.tasks.map((task, i) => this.renderTask(task, i));
+  };
 
   renderTask = (task, ind) => {
+    // console.log(`Individual task: ${task.description}`);
     if (task.visible)
       return (
         <Task
@@ -157,6 +164,7 @@ class App extends React.Component {
   };
 
   render() {
+    // console.log(`Tasks: ${this.state.tasks.map((task) => task.description)}`);
     return (
       <div className="taskboard">
         <div className="totalTimer">

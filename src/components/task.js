@@ -20,8 +20,9 @@ export default class Task extends React.Component {
 
   activeState = () => (this.props.active ? "taskActive" : "taskInactive");
 
-  updateDescription = (event) =>
+  updateDescription = (event) => {
     this.setState({ description: event.target.value });
+  };
 
   render() {
     return (
@@ -30,7 +31,7 @@ export default class Task extends React.Component {
           <input
             className="description"
             type="text"
-            value={this.state.description}
+            value={this.props.description}
             onChange={this.updateDescription}
           />
           <button className="stopwatch">

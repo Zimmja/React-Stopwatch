@@ -32,10 +32,16 @@ const tasksTotal = (tasksArr) => {
 };
 
 const deleteHiddenTasks = (tasksArr, hiddenArr, updateFunction) => {
+  // console.log("BEFORE:");
+  // console.log(tasksArr.map((task) => task.description));
+  // console.log(hiddenArr.map((task) => task.description));
   while (hiddenArr.length > 0) {
     tasksArr.splice(tasksArr.indexOf(hiddenArr[0]), 1);
     hiddenArr.shift();
   }
+  // console.log("AFTER:");
+  // console.log(tasksArr.map((task) => task.description));
+  // console.log(hiddenArr.map((task) => task.description));
   updateFunction({ tasks: tasksArr, hidden: hiddenArr });
 };
 
