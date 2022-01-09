@@ -9,6 +9,8 @@ import {
   resetTask,
   tasksTotal,
 } from "./helpers/appTasks.js";
+import iconUndo from "./media/iconUndo.png";
+import iconAdd from "./media/iconAdd.png";
 
 class App extends React.Component {
   constructor(props) {
@@ -31,12 +33,12 @@ class App extends React.Component {
   // ---------------------------
   reState = (newState) => this.setState(newState);
 
-  copyTasksArr = () => this.state.tasks.slice();
+  arrTasks = () => this.state.tasks.slice();
 
-  copyHiddenArr = () => this.state.hidden.slice();
+  arrHidden = () => this.state.hidden.slice();
 
   myArrs = (i) => {
-    const arrs = [this.copyTasksArr(), this.copyHiddenArr()];
+    const arrs = [this.arrTasks(), this.arrHidden()];
     return arrs[i];
   };
 
@@ -60,7 +62,7 @@ class App extends React.Component {
 
   incTimer = (val = 0) => {
     const newTime = this.currentTimer() + val;
-    const tasksArr = this.copyTasksArr();
+    const tasksArr = this.arrTasks();
     tasksArr[this.currentTask].value = newTime;
     this.setState({ tasks: tasksArr });
   };
@@ -95,36 +97,46 @@ class App extends React.Component {
           active={ind === this.currentTask}
           onSelectClick={(i) => this.selectTask(i)}
           onDeleteClick={(i) =>
-            deleteTask(i, this.myArrs(0), this.myArrs(1), this.reState)
+            deleteTask(i, this.arrTasks(), this.arrHidden(), this.reState)
           }
-          onResetClick={(i) => resetTask(i, this.myArrs(0), this.reState)}
+          onResetClick={(i) => resetTask(i, this.arrTasks(), this.reState)}
         />
       );
   };
 
-  unhideButtonFormat = () =>
-    this.state.hidden.length > 0 ? "unhideActive" : "unhideInactive";
+  renderTaskButtons = () => {
+    return (
+      <div>
+        <button
+          id="addTaskButton"
+          onClick={() => addTask(this.arrTasks(), this.reState)}
+        >
+          <img className="appIcon" src={iconAdd} alt="Add task" />
+        </button>
+        {this.renderUndoButton()}
+      </div>
+    );
+  };
+
+  unhideTask = () => unhideTask(this.arrHidden(), this.reState);
+
+  renderUndoButton = () => {
+    if (this.state.hidden.length > 0)
+      return (
+        <button id="unhideButton" onClick={() => this.unhideTask()}>
+          <img className="appIcon" src={iconUndo} alt="Undelete task" />
+        </button>
+      );
+  };
 
   render() {
     return (
       <div className="taskboard">
         <div class="totalTimer">
-          <Stopwatch timer={tasksTotal(this.myArrs(0))} />
+          <Stopwatch timer={tasksTotal(this.arrTasks())} />
         </div>
+        <div className="topButtons">{this.renderTaskButtons()}</div>
         <div className="tasksList">{this.renderAllTasks()}</div>
-        <button
-          id="addTaskButton"
-          onClick={() => addTask(this.myArrs(0), this.reState)}
-        >
-          +
-        </button>
-        <button
-          className={this.unhideButtonFormat()}
-          id="unhideButton"
-          onClick={() => unhideTask(this.myArrs(1), this.reState)}
-        >
-          {"<"}
-        </button>
       </div>
     );
   }

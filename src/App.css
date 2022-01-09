@@ -5,37 +5,36 @@
 .taskboard {
   text-align: center;
   margin: 5% auto;
-  width: 1000px;
+  width: 600px;
+  background-color: rgba(255, 255, 255, 0.171);
+  border-radius: 10px;
+  padding: 40px 10px;
 }
 
 #addTaskButton,
 #unhideButton {
-  width: 50px;
-  height: 100%;
   margin: 0 5px;
   border-radius: 200px;
-  border-color: black;
+  border: none;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 20px;
   cursor: pointer;
 }
 
 #addTaskButton {
-  color: white;
   background-color: rgba(8, 104, 28, 0.5);
 }
 
-.unhideActive {
-  color: white;
-  background-color: rgba(155, 163, 42, 0.5);
-}
-
-.unhideInactive {
-  color: rgb(110, 219, 201);
-  background-color: rgb(179, 226, 209);
+#unhideButton {
+  background-color: rgba(42, 155, 163, 0.5);
 }
 
 .totalTimer {
-  font-size: 40px;
+  font-size: 50px;
   font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.appIcon {
+  height: 13px;
 }

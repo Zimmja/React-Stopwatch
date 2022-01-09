@@ -1,6 +1,8 @@
 import React from "react";
 import "./task.css";
 import Stopwatch from "./stopwatch.js";
+import iconCross from "../media/iconCross.png";
+import iconZero from "../media/iconZero.png";
 
 export default class Task extends React.Component {
   constructor(props) {
@@ -38,17 +40,13 @@ export default class Task extends React.Component {
             />
           </button>
           <button className="reset" onClick={() => this.handleRClick()}>
-            R
+            <img className="butIcon" src={iconZero} alt="Reset timer" />
           </button>
           <button className="delete" onClick={() => this.handleDClick()}>
-            X
+            <img className="butIcon" src={iconCross} alt="Exit" />
           </button>
         </div>
       </div>
     );
   }
 }
-
-<button class="pushable">
-  <span class="front">Push me</span>
-</button>;
