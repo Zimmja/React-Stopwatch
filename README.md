@@ -11,6 +11,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 1. To begin, I learned how to create a simple stomwatch with this tutorial: [How to Build a Stopwatch Timer using React Hooks](https://www.youtube.com/watch?v=sSWGdj8a5Fs&ab_channel=CodeBoost)
 2. 3D button design: [Building a Magical 3D Button](https://www.joshwcomeau.com/animation/3d-button/)
+3. Conditional CSS: [Applying Classes Conditionally in React](https://www.pluralsight.com/guides/applying-classes-conditionally-react)
 
 ## Available Scripts
 

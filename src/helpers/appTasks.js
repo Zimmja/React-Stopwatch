@@ -8,7 +8,6 @@ const addTask = (tasksArr, updateFunction) => {
 };
 
 const deleteTask = (i, tasksArr, hiddenArr, updateFunction) => {
-  console.log(tasksArr);
   tasksArr[i].visible = false;
   hiddenArr.push(tasksArr[i]);
   updateFunction({ tasks: tasksArr, hidden: hiddenArr });
@@ -20,4 +19,9 @@ const unhideTask = (hiddenArr, updateFunction) => {
   updateFunction({ hidden: hiddenArr });
 };
 
-module.exports = { addTask, deleteTask, unhideTask };
+const resetTask = (i, tasksArr, updateFunction) => {
+  tasksArr[i].value = 0;
+  updateFunction({ tasks: tasksArr });
+};
+
+module.exports = { addTask, deleteTask, unhideTask, resetTask };

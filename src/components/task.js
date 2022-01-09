@@ -10,9 +10,11 @@ export default class Task extends React.Component {
     };
   }
 
-  handleSWClick = () => this.props.onSWClick(this.props.index);
+  handleSWClick = () => this.props.onSelectClick(this.props.index);
 
-  handleDClick = () => this.props.onDClick(this.props.index);
+  handleDClick = () => this.props.onDeleteClick(this.props.index);
+
+  handleRClick = () => this.props.onResetClick(this.props.index);
 
   activeState = () => (this.props.active ? "taskActive" : "taskInactive");
 
@@ -35,6 +37,9 @@ export default class Task extends React.Component {
               timer={this.props.timer}
               index={this.props.index}
             />
+          </button>
+          <button className="reset" onClick={() => this.handleRClick()}>
+            R
           </button>
           <button className="delete" onClick={() => this.handleDClick()}>
             X

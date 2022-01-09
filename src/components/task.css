@@ -8,7 +8,7 @@
 
 .taskBase {
   margin: 40px auto;
-  width: 45%;
+  width: 50%;
   background-color: rgb(41, 85, 78);
 }
 
@@ -41,7 +41,8 @@
 }
 
 .stopwatch,
-.delete {
+.delete,
+.reset {
   height: 100%;
   border-radius: 200px;
   border-color: black;
@@ -61,4 +62,11 @@
   color: white;
   width: 40px;
   background-color: rgba(29, 7, 21, 0.5);
+}
+
+.reset {
+  color: white;
+  width: 40px;
+  margin-right: 10px;
+  background-color: rgba(70, 121, 11, 0.226);
 }

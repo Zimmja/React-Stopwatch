@@ -1,7 +1,12 @@
 import React from "react";
 import "./App.css";
 import Task from "./components/task.js";
-import { addTask, deleteTask, unhideTask } from "./helpers/appTasks.js";
+import {
+  addTask,
+  deleteTask,
+  unhideTask,
+  resetTask,
+} from "./helpers/appTasks.js";
 
 class App extends React.Component {
   constructor(props) {
@@ -86,10 +91,11 @@ class App extends React.Component {
           description={task.description}
           index={ind}
           active={ind === this.currentTask}
-          onSWClick={(i) => this.selectTask(i)}
-          onDClick={(i) =>
+          onSelectClick={(i) => this.selectTask(i)}
+          onDeleteClick={(i) =>
             deleteTask(i, this.myArrs(0), this.myArrs(1), this.reState)
           }
+          onResetClick={(i) => resetTask(i, this.myArrs(0), this.reState)}
         />
       );
   };
