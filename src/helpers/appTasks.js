@@ -7,7 +7,7 @@ const addTask = (tasksArr, updateFunction) => {
   updateFunction({ tasks: tasksArr });
 };
 
-const deleteTask = (i, tasksArr, hiddenArr, updateFunction) => {
+const hideTask = (i, tasksArr, hiddenArr, updateFunction) => {
   tasksArr[i].visible = false;
   hiddenArr.push(tasksArr[i]);
   updateFunction({ tasks: tasksArr, hidden: hiddenArr });
@@ -29,4 +29,4 @@ const tasksTotal = (tasksArr) => {
   return taskVals.reduce((pre, pos) => pre + pos);
 };
 
-module.exports = { addTask, deleteTask, unhideTask, resetTask, tasksTotal };
+module.exports = { addTask, hideTask, unhideTask, resetTask, tasksTotal };

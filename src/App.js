@@ -4,13 +4,14 @@ import Task from "./components/task.js";
 import Stopwatch from "./components/stopwatch.js";
 import {
   addTask,
-  deleteTask,
+  hideTask,
   unhideTask,
   resetTask,
   tasksTotal,
 } from "./helpers/appTasks.js";
 import iconUndo from "./media/iconUndo.png";
 import iconAdd from "./media/iconAdd.png";
+import iconBin from "./media/iconBin.png";
 
 class App extends React.Component {
   constructor(props) {
@@ -54,8 +55,8 @@ class App extends React.Component {
 
   resetTask = (i) => resetTask(i, this.arrTasks(), this.reState);
 
-  deleteTask = (i) =>
-    deleteTask(i, this.arrTasks(), this.arrHidden(), this.reState);
+  hideTask = (i) =>
+    hideTask(i, this.arrTasks(), this.arrHidden(), this.reState);
 
   // ---------------------------
   // TIMER MANAGEMENT
@@ -108,7 +109,7 @@ class App extends React.Component {
           index={ind}
           active={ind === this.currentTask}
           onSelectClick={(i) => this.selectTask(i)}
-          onDeleteClick={(i) => this.deleteTask(i)}
+          onHideClick={(i) => this.hideTask(i)}
           onResetClick={(i) => this.resetTask(i)}
         />
       );
@@ -117,12 +118,22 @@ class App extends React.Component {
   renderTaskButtons = () => {
     return (
       <div>
+        {this.renderClearButton()}
         <button id="addTaskButton" onClick={() => this.addTask()}>
           <img className="appIcon" src={iconAdd} alt="Add task" />
         </button>
         {this.renderUndoButton()}
       </div>
     );
+  };
+
+  renderClearButton = () => {
+    if (this.state.hidden.length > 0)
+      return (
+        <button id="unhideButton" onClick={() => this.unhideTask()}>
+          <img className="appIcon" src={iconBin} alt="Forget deleted tasks" />
+        </button>
+      );
   };
 
   renderUndoButton = () => {
@@ -140,8 +151,8 @@ class App extends React.Component {
         <div class="totalTimer">
           <Stopwatch timer={tasksTotal(this.arrTasks())} />
         </div>
-        <div className="topButtons">{this.renderTaskButtons()}</div>
         <div className="tasksList">{this.renderAllTasks()}</div>
+        <div className="taskButtons">{this.renderTaskButtons()}</div>
       </div>
     );
   }

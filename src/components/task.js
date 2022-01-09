@@ -14,7 +14,7 @@ export default class Task extends React.Component {
 
   handleSWClick = () => this.props.onSelectClick(this.props.index);
 
-  handleDClick = () => this.props.onDeleteClick(this.props.index);
+  handleDClick = () => this.props.onHideClick(this.props.index);
 
   handleRClick = () => this.props.onResetClick(this.props.index);
 
