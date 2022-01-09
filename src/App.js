@@ -46,7 +46,12 @@ class App extends React.Component {
     appTasks.hideTask(i, this.arrTasks(), this.arrHidden(), this.reState);
 
   deleteHiddenTasks = () => {
-    appTasks.deleteHiddenTasks(this.arrTasks(), this.arrHidden(), this.reState);
+    appTasks.deleteHiddenTasks(
+      this.arrTasks(),
+      this.arrHidden(),
+      this.reState,
+      [this.currentTask, this.setCurrent]
+    );
   };
 
   resetTask = (i) => appTasks.resetTask(i, this.arrTasks(), this.reState);
@@ -62,34 +67,6 @@ class App extends React.Component {
   // TIMER MANAGEMENT
   // ---------------------------
   startTimer = () => this.setState({ activeLoop: this.incTimerLoop() });
-
-  // pauseTimer = () => {
-  //   clearInterval(this.state.activeLoop);
-  //   this.reState({ activeLoop: null });
-  // };
-
-  // incTimerLoop = () =>
-  //   setInterval(() => {
-  //     this.incTimer(this.timeInterval);
-  //   }, this.timeInterval);
-
-  // incTimer = (val = 0) => {
-  //   const tasksArr = this.arrTasks();
-  //   const newTime = tasksArr[this.currentTask].value + val;
-  //   tasksArr[this.currentTask].value = newTime;
-  //   this.reState({ tasks: tasksArr });
-  // };
-
-  // stopTimer = () => {
-  //   this.pauseTimer();
-  //   this.setCurrent(-1);
-  // };
-
-  // restartTimer = (i) => {
-  //   this.pauseTimer();
-  //   this.setCurrent(i);
-  //   this.startTimer();
-  // };
 
   pauseTimer = () => appTimer.pauseTimer(this.state.activeLoop, this.reState);
 
@@ -169,3 +146,31 @@ class App extends React.Component {
 }
 
 export default App;
+
+// pauseTimer = () => {
+//   clearInterval(this.state.activeLoop);
+//   this.reState({ activeLoop: null });
+// };
+
+// incTimerLoop = () =>
+//   setInterval(() => {
+//     this.incTimer(this.timeInterval);
+//   }, this.timeInterval);
+
+// incTimer = (val = 0) => {
+//   const tasksArr = this.arrTasks();
+//   const newTime = tasksArr[this.currentTask].value + val;
+//   tasksArr[this.currentTask].value = newTime;
+//   this.reState({ tasks: tasksArr });
+// };
+
+// stopTimer = () => {
+//   this.pauseTimer();
+//   this.setCurrent(-1);
+// };
+
+// restartTimer = (i) => {
+//   this.pauseTimer();
+//   this.setCurrent(i);
+//   this.startTimer();
+// };
