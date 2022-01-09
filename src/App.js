@@ -3,7 +3,7 @@ import "./App.css";
 import Task from "./components/task.js";
 import Stopwatch from "./components/stopwatch.js";
 import appTasks from "./helpers/appTasks.js";
-import appTimer from "./helpers/appTimer.js";
+// import appTimer from "./helpers/appTimer.js";
 import iconUndo from "./media/iconUndo.png";
 import iconAdd from "./media/iconAdd.png";
 import iconBin from "./media/iconBin.png";
@@ -62,19 +62,47 @@ class App extends React.Component {
   // ---------------------------
   startTimer = () => this.setState({ activeLoop: this.incTimerLoop() });
 
-  pauseTimer = () => appTimer.pauseTimer(this.state.activeLoop, this.reState);
+  pauseTimer = () => {
+    clearInterval(this.state.activeLoop);
+    this.reState({ activeLoop: null });
+  };
 
-  incTimerLoop = () =>
-    appTimer.incTimerLoop(this.timeInterval, {
-      current: this.currentTask,
-      tasks: this.arrTasks(),
-      restateFunc: this.reState,
-    });
+  incTimerLoop = (incTimerProps) =>
+    setInterval(() => {
+      this.incTimer(this.timeInterval, incTimerProps);
+    }, this.timeInterval);
 
-  stopTimer = () => appTimer.stopTimer(this.pauseTimer, this.setCurrent);
+  incTimer = (val = 0) => {
+    const tasksArr = this.arrTasks();
+    const newTime = tasksArr[this.currentTask].value + val;
+    tasksArr[this.currentTask].value = newTime;
+    this.reState({ tasks: tasksArr });
+  };
 
-  restartTimer = (i) =>
-    appTimer.restartTimer(i, this.pauseTimer, this.setCurrent, this.startTimer);
+  stopTimer = () => {
+    this.pauseTimer();
+    this.setCurrent(-1);
+  };
+
+  restartTimer = (i) => {
+    this.pauseTimer();
+    this.setCurrent(i);
+    this.startTimer();
+  };
+
+  // pauseTimer = () => appTimer.pauseTimer(this.state.activeLoop, this.reState);
+
+  // incTimerLoop = () =>
+  //   appTimer.incTimerLoop(this.timeInterval, {
+  //     current: this.currentTask,
+  //     tasks: this.arrTasks(),
+  //     restateFunc: this.reState,
+  //   });
+
+  // stopTimer = () => appTimer.stopTimer(this.pauseTimer, this.setCurrent);
+
+  // restartTimer = (i) =>
+  //   appTimer.restartTimer(i, this.pauseTimer, this.setCurrent, this.startTimer);
 
   // ---------------------------
   // RENDER MANAGEMENT
