@@ -26,7 +26,8 @@ const resetTask = (i, tasksArr, updateFunction) => {
 };
 
 const tasksTotal = (tasksArr) => {
-  const taskVals = tasksArr.map((task) => task.value);
+  const unhiddenTasks = tasksArr.filter((task) => task.visible === true);
+  const taskVals = unhiddenTasks.map((task) => task.value);
   return taskVals.reduce((pre, pos) => pre + pos);
 };
 
