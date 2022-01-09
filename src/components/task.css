@@ -7,7 +7,7 @@
 }
 
 .taskBase {
-  margin: 40px auto;
+  margin: 40px auto 20px;
   width: 50%;
   background-color: rgb(41, 85, 78);
 }
@@ -68,5 +68,5 @@
   color: white;
   width: 40px;
   margin-right: 10px;
-  background-color: rgba(70, 121, 11, 0.226);
+  background-color: rgba(11, 81, 121, 0.226);
 }

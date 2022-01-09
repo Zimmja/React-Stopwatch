@@ -35,7 +35,6 @@ export default class Task extends React.Component {
             <Stopwatch
               key={`stopwatch${this.props.index}`}
               timer={this.props.timer}
-              index={this.props.index}
             />
           </button>
           <button className="reset" onClick={() => this.handleRClick()}>

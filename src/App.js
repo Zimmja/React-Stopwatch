@@ -1,11 +1,13 @@
 import React from "react";
 import "./App.css";
 import Task from "./components/task.js";
+import Stopwatch from "./components/stopwatch.js";
 import {
   addTask,
   deleteTask,
   unhideTask,
   resetTask,
+  tasksTotal,
 } from "./helpers/appTasks.js";
 
 class App extends React.Component {
@@ -15,9 +17,9 @@ class App extends React.Component {
     this.currentTask = -1;
     this.state = {
       tasks: [
-        { description: "Break", value: 59000, visible: true },
-        { description: "Administration", value: 3600000 - 2000, visible: true },
-        { description: "Meetings", value: 86400000 - 3000, visible: true },
+        { description: "Break", value: 0, visible: true },
+        { description: "Administration", value: 0, visible: true },
+        { description: "Meetings", value: 0, visible: true },
       ],
       hidden: [],
       activeLoop: null,
@@ -106,6 +108,10 @@ class App extends React.Component {
   render() {
     return (
       <div className="taskboard">
+        <div class="totalTimer">
+          <Stopwatch timer={tasksTotal(this.myArrs(0))} />
+        </div>
+        <div className="tasksList">{this.renderAllTasks()}</div>
         <button
           id="addTaskButton"
           onClick={() => addTask(this.myArrs(0), this.reState)}
@@ -119,7 +125,6 @@ class App extends React.Component {
         >
           {"<"}
         </button>
-        <div className="tasksList">{this.renderAllTasks()}</div>
       </div>
     );
   }

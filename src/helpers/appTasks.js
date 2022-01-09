@@ -24,4 +24,9 @@ const resetTask = (i, tasksArr, updateFunction) => {
   updateFunction({ tasks: tasksArr });
 };
 
-module.exports = { addTask, deleteTask, unhideTask, resetTask };
+const tasksTotal = (tasksArr) => {
+  const taskVals = tasksArr.map((task) => task.value);
+  return taskVals.reduce((pre, pos) => pre + pos);
+};
+
+module.exports = { addTask, deleteTask, unhideTask, resetTask, tasksTotal };
