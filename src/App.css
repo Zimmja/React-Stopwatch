@@ -5,10 +5,10 @@
 .taskboard {
   text-align: center;
   margin: 5% auto;
-  width: 600px;
+  width: 700px;
   background-color: rgba(255, 255, 255, 0.171);
   border-radius: 10px;
-  padding: 40px 10px;
+  padding: 40px 0;
 }
 
 #addTaskButton,

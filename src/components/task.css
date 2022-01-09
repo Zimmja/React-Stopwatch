@@ -8,7 +8,7 @@
 
 .taskBase {
   margin: 40px auto 20px;
-  width: 79%;
+  width: 548px;
   background-color: rgb(41, 85, 78);
 }
 
@@ -47,34 +47,38 @@
   margin-right: 20px;
   margin-left: 20px;
   height: 100%;
-  border-radius: 200px;
-  border-color: black;
+  border-radius: 12px;
+  border: none;
   font-weight: bold;
   font-size: large;
+}
+
+.delete,
+.reset,
+.stopstart {
+  height: 30px;
+  border-radius: 12px;
+  color: white;
+  border: none;
   cursor: pointer;
+}
+
+.stopstart {
+  width: 70px;
+  font-weight: bold;
+  font-size: 14px;
+  background-color: rgba(127, 199, 164, 0.4);
 }
 
 .delete,
 .reset {
-  height: 30px;
   width: 30px;
-  border-radius: 12px;
-  color: white;
-  border: none;
-  font-weight: bold;
-  font-size: large;
-  cursor: pointer;
-}
-
-.delete {
-  background-color: rgba(248, 248, 248, 0.281);
-}
-
-.reset {
-  margin-right: 10px;
+  margin-right: 6px;
   background-color: rgba(248, 248, 248, 0.281);
 }
 
 .butIcon {
+  position: relative;
+  top: 1px;
   height: 12px;
 }

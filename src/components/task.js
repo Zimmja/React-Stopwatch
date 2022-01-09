@@ -33,7 +33,7 @@ export default class Task extends React.Component {
             value={this.state.description}
             onChange={this.updateDescription}
           />
-          <button className="stopwatch" onClick={() => this.handleSWClick()}>
+          <button className="stopwatch">
             <Stopwatch
               key={`stopwatch${this.props.index}`}
               timer={this.props.timer}
@@ -44,6 +44,9 @@ export default class Task extends React.Component {
           </button>
           <button className="delete" onClick={() => this.handleDClick()}>
             <img className="butIcon" src={iconCross} alt="Hide task" />
+          </button>
+          <button className="stopstart" onClick={() => this.handleSWClick()}>
+            {this.props.active ? "STOP" : "START"}
           </button>
         </div>
       </div>
