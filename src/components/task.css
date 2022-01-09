@@ -28,16 +28,6 @@
   transform: translateY(-24px);
 }
 
-.front {
-  display: block;
-  padding: 12px 42px;
-  border-radius: 12px;
-  font-size: 1.25rem;
-  background: hsl(345deg 100% 47%);
-  color: white;
-  transform: translateY(-6px);
-}
-
 .description {
   height: 82%;
   padding-left: 10px;
@@ -55,20 +45,20 @@
   height: 100%;
   border-radius: 200px;
   border-color: black;
-  color: white;
   font-weight: bold;
   font-size: large;
   cursor: pointer;
 }
 
 .stopwatch {
-  width: 100px;
+  min-width: 130px;
   background-color: rgba(28, 51, 45, 0.5);
-  margin-right: 30px;
-  margin-left: 30px;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 .delete {
+  color: white;
   width: 40px;
   background-color: rgba(29, 7, 21, 0.5);
 }

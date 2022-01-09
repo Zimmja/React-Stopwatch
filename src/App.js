@@ -10,9 +10,9 @@ class App extends React.Component {
     this.currentTask = -1;
     this.state = {
       tasks: [
-        { description: "Break", value: 0, visible: true },
-        { description: "Administration", value: 0, visible: true },
-        { description: "Meetings", value: 0, visible: true },
+        { description: "Break", value: 59000, visible: true },
+        { description: "Administration", value: 3600000 - 2000, visible: true },
+        { description: "Meetings", value: 86400000 - 3000, visible: true },
       ],
       hidden: [],
       activeLoop: null,
