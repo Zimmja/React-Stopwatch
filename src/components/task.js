@@ -21,24 +21,30 @@ export default class Task extends React.Component {
 
   render() {
     return (
-      <div className={this.activeState()}>
-        <input
-          className="description"
-          type="text"
-          value={this.state.description}
-          onChange={this.updateDescription}
-        />
-        <button className="stopwatch" onClick={() => this.handleSWClick()}>
-          <Stopwatch
-            key={`stopwatch${this.props.index}`}
-            timer={this.props.timer}
-            index={this.props.index}
+      <div className="taskBase">
+        <div className={this.activeState()}>
+          <input
+            className="description"
+            type="text"
+            value={this.state.description}
+            onChange={this.updateDescription}
           />
-        </button>
-        <button className="delete" onClick={() => this.handleDClick()}>
-          X
-        </button>
+          <button className="stopwatch" onClick={() => this.handleSWClick()}>
+            <Stopwatch
+              key={`stopwatch${this.props.index}`}
+              timer={this.props.timer}
+              index={this.props.index}
+            />
+          </button>
+          <button className="delete" onClick={() => this.handleDClick()}>
+            X
+          </button>
+        </div>
       </div>
     );
   }
 }
+
+<button class="pushable">
+  <span class="front">Push me</span>
+</button>;

@@ -19,6 +19,9 @@ class App extends React.Component {
     };
   }
 
+  // ---------------------------
+  // STATE MANAGEMENT
+  // ---------------------------
   reState = (newState) => this.setState(newState);
 
   copyTasksArr = () => this.state.tasks.slice();
@@ -30,9 +33,12 @@ class App extends React.Component {
     return arrs[i];
   };
 
-  unhideButtonFormat = () =>
-    this.state.hidden.length > 0 ? "unhideActive" : "unhideInactive";
+  selectTask = (i) =>
+    i === this.currentTask ? this.stopTimer() : this.startNewTimer(i);
 
+  // ---------------------------
+  // TIMER MANAGEMENT
+  // ---------------------------
   startTimer = () => this.setState({ activeLoop: this.incTimerLoop() });
 
   pauseTimer = () => {
@@ -52,9 +58,6 @@ class App extends React.Component {
     this.setState({ tasks: tasksArr });
   };
 
-  selectTask = (i) =>
-    i === this.currentTask ? this.stopTimer() : this.startNewTimer(i);
-
   stopTimer = () => {
     this.pauseTimer();
     this.currentTask = -1;
@@ -68,6 +71,9 @@ class App extends React.Component {
 
   currentTimer = (i = this.currentTask) => this.state.tasks[i].value;
 
+  // ---------------------------
+  // RENDER MANAGEMENT
+  // ---------------------------
   renderAllTasks = () =>
     this.state.tasks.map((task, i) => this.renderTask(task, i));
 
@@ -87,6 +93,9 @@ class App extends React.Component {
         />
       );
   };
+
+  unhideButtonFormat = () =>
+    this.state.hidden.length > 0 ? "unhideActive" : "unhideInactive";
 
   render() {
     return (

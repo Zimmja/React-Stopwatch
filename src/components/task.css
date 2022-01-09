@@ -1,19 +1,41 @@
+.taskBase,
 .taskInactive,
 .taskActive {
-  padding: 5px;
-  margin: 15px auto;
-  width: 420px;
-  min-width: 100px;
+  border-radius: 12px;
+  border: none;
   height: 40px;
-  border-radius: 100px;
+}
+
+.taskBase {
+  margin: 40px auto;
+  width: 45%;
+  background-color: rgb(41, 85, 78);
+}
+
+.taskActive,
+.taskInactive {
+  display: block;
+  padding: 8px;
 }
 
 .taskActive {
-  background-color: rgba(51, 49, 28, 0.75);
+  background-color: rgb(17, 160, 136);
+  transform: translateY(-16px);
 }
 
 .taskInactive {
-  background-color: rgba(28, 51, 45, 0.5);
+  background-color: rgb(52, 107, 98);
+  transform: translateY(-24px);
+}
+
+.front {
+  display: block;
+  padding: 12px 42px;
+  border-radius: 12px;
+  font-size: 1.25rem;
+  background: hsl(345deg 100% 47%);
+  color: white;
+  transform: translateY(-6px);
 }
 
 .description {
