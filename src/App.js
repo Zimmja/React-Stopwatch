@@ -46,6 +46,18 @@ class App extends React.Component {
     i === this.currentTask ? this.stopTimer() : this.startNewTimer(i);
 
   // ---------------------------
+  // TASK MANAGEMENT
+  // ---------------------------
+  unhideTask = () => unhideTask(this.arrHidden(), this.reState);
+
+  addTask = () => addTask(this.arrTasks(), this.reState);
+
+  resetTask = (i) => resetTask(i, this.arrTasks(), this.reState);
+
+  deleteTask = (i) =>
+    deleteTask(i, this.arrTasks(), this.arrHidden(), this.reState);
+
+  // ---------------------------
   // TIMER MANAGEMENT
   // ---------------------------
   startTimer = () => this.setState({ activeLoop: this.incTimerLoop() });
@@ -96,10 +108,8 @@ class App extends React.Component {
           index={ind}
           active={ind === this.currentTask}
           onSelectClick={(i) => this.selectTask(i)}
-          onDeleteClick={(i) =>
-            deleteTask(i, this.arrTasks(), this.arrHidden(), this.reState)
-          }
-          onResetClick={(i) => resetTask(i, this.arrTasks(), this.reState)}
+          onDeleteClick={(i) => this.deleteTask(i)}
+          onResetClick={(i) => this.resetTask(i)}
         />
       );
   };
@@ -107,18 +117,13 @@ class App extends React.Component {
   renderTaskButtons = () => {
     return (
       <div>
-        <button
-          id="addTaskButton"
-          onClick={() => addTask(this.arrTasks(), this.reState)}
-        >
+        <button id="addTaskButton" onClick={() => this.addTask()}>
           <img className="appIcon" src={iconAdd} alt="Add task" />
         </button>
         {this.renderUndoButton()}
       </div>
     );
   };
-
-  unhideTask = () => unhideTask(this.arrHidden(), this.reState);
 
   renderUndoButton = () => {
     if (this.state.hidden.length > 0)
