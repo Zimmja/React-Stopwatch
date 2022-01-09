@@ -3,7 +3,7 @@ import "./App.css";
 import Task from "./components/task.js";
 import Stopwatch from "./components/stopwatch.js";
 import appTasks from "./helpers/appTasks.js";
-// import appTimer from "./helpers/appTimer.js";
+import appTimer from "./helpers/appTimer.js";
 import iconUndo from "./media/iconUndo.png";
 import iconAdd from "./media/iconAdd.png";
 import iconBin from "./media/iconBin.png";
@@ -47,7 +47,6 @@ class App extends React.Component {
 
   deleteHiddenTasks = () => {
     appTasks.deleteHiddenTasks(this.arrTasks(), this.arrHidden(), this.reState);
-    // console.log(`Tasks: ${this.state.tasks.map((task) => task.description)}`);
   };
 
   resetTask = (i) => appTasks.resetTask(i, this.arrTasks(), this.reState);
@@ -64,60 +63,53 @@ class App extends React.Component {
   // ---------------------------
   startTimer = () => this.setState({ activeLoop: this.incTimerLoop() });
 
-  pauseTimer = () => {
-    clearInterval(this.state.activeLoop);
-    this.reState({ activeLoop: null });
-  };
-
-  incTimerLoop = (incTimerProps) =>
-    setInterval(() => {
-      this.incTimer(this.timeInterval, incTimerProps);
-    }, this.timeInterval);
-
-  incTimer = (val = 0) => {
-    const tasksArr = this.arrTasks();
-    const newTime = tasksArr[this.currentTask].value + val;
-    tasksArr[this.currentTask].value = newTime;
-    this.reState({ tasks: tasksArr });
-  };
-
-  stopTimer = () => {
-    this.pauseTimer();
-    this.setCurrent(-1);
-  };
-
-  restartTimer = (i) => {
-    this.pauseTimer();
-    this.setCurrent(i);
-    this.startTimer();
-  };
-
-  // pauseTimer = () => appTimer.pauseTimer(this.state.activeLoop, this.reState);
+  // pauseTimer = () => {
+  //   clearInterval(this.state.activeLoop);
+  //   this.reState({ activeLoop: null });
+  // };
 
   // incTimerLoop = () =>
-  //   appTimer.incTimerLoop(this.timeInterval, {
-  //     current: this.currentTask,
-  //     tasks: this.arrTasks(),
-  //     restateFunc: this.reState,
-  //   });
+  //   setInterval(() => {
+  //     this.incTimer(this.timeInterval);
+  //   }, this.timeInterval);
 
-  // stopTimer = () => appTimer.stopTimer(this.pauseTimer, this.setCurrent);
+  // incTimer = (val = 0) => {
+  //   const tasksArr = this.arrTasks();
+  //   const newTime = tasksArr[this.currentTask].value + val;
+  //   tasksArr[this.currentTask].value = newTime;
+  //   this.reState({ tasks: tasksArr });
+  // };
 
-  // restartTimer = (i) =>
-  //   appTimer.restartTimer(i, this.pauseTimer, this.setCurrent, this.startTimer);
+  // stopTimer = () => {
+  //   this.pauseTimer();
+  //   this.setCurrent(-1);
+  // };
+
+  // restartTimer = (i) => {
+  //   this.pauseTimer();
+  //   this.setCurrent(i);
+  //   this.startTimer();
+  // };
+
+  pauseTimer = () => appTimer.pauseTimer(this.state.activeLoop, this.reState);
+
+  incTimerLoop = () => appTimer.incTimerLoop(this.incTimer, this.timeInterval);
+
+  incTimer = (val = 0) =>
+    appTimer.incTimer(val, this.arrTasks(), this.currentTask, this.reState);
+
+  stopTimer = () => appTimer.stopTimer(this.pauseTimer, this.setCurrent);
+
+  restartTimer = (i) =>
+    appTimer.restartTimer(i, this.pauseTimer, this.setCurrent, this.startTimer);
 
   // ---------------------------
   // RENDER MANAGEMENT
   // ---------------------------
-  renderAllTasks = () => {
-    // console.log(
-    //   `Rendering: ${this.state.tasks.map((task) => task.description)}`
-    // );
-    return this.state.tasks.map((task, i) => this.renderTask(task, i));
-  };
+  renderAllTasks = () =>
+    this.state.tasks.map((task, i) => this.renderTask(task, i));
 
   renderTask = (task, ind) => {
-    // console.log(`Individual task: ${task.description}`);
     if (task.visible)
       return (
         <Task
@@ -164,7 +156,6 @@ class App extends React.Component {
   };
 
   render() {
-    // console.log(`Tasks: ${this.state.tasks.map((task) => task.description)}`);
     return (
       <div className="taskboard">
         <div className="totalTimer">

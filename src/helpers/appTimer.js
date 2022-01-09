@@ -3,16 +3,15 @@ const pauseTimer = (loopFunc, reState) => {
   reState({ activeLoop: null });
 };
 
-const incTimerLoop = (timeInterval, incTimerProps) =>
+const incTimerLoop = (incFunc, timeInterval) =>
   setInterval(() => {
-    incTimer(timeInterval, incTimerProps);
+    incFunc(timeInterval);
   }, timeInterval);
 
-const incTimer = (val = 0, incProps) => {
-  const tasksArr = incProps.tasks;
-  const newTime = tasksArr[incProps.current].value + val;
-  tasksArr[incProps.current].value = newTime;
-  incProps.restateFunc({ tasks: tasksArr });
+const incTimer = (val = 0, tasksArr, currentTask, reState) => {
+  const newTime = tasksArr[currentTask].value + val;
+  tasksArr[currentTask].value = newTime;
+  reState({ tasks: tasksArr });
 };
 
 const stopTimer = (pause, setCurrent) => {
@@ -29,6 +28,7 @@ const restartTimer = (i, pause, setCurrent, start) => {
 const appTimer = {
   pauseTimer,
   incTimerLoop,
+  incTimer,
   stopTimer,
   restartTimer,
 };
