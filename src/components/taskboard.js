@@ -14,16 +14,23 @@ class Taskboard extends React.Component {
     this.timeInterval = 1000;
     this.currentTask = -1;
     this.state = {
-      tasks: [
-        { description: "Break", value: 0, visible: true },
-        { description: "Administration", value: 0, visible: true },
-        { description: "Meetings", value: 0, visible: true },
-      ],
+      tasks: this.setupTasks(),
       hidden: [],
-      taskMax: 3,
+      taskMax: this.setupTasksCount(),
       activeLoop: null,
     };
   }
+
+  setupTasksCount = () => this.props.taskCount;
+
+  setupTasks = () => {
+    const taskCount = this.props.taskCount;
+    const tasks = [];
+    for (let i = 0; i < taskCount; i++) {
+      tasks.push({ description: `Task ${i + 1}`, value: 0, visible: true });
+    }
+    return tasks;
+  };
 
   // ---------------------------
   // STATE MANAGEMENT
@@ -39,8 +46,10 @@ class Taskboard extends React.Component {
   // ---------------------------
   // TASK MANAGEMENT
   // ---------------------------
-  addTask = () =>
+  addTask = () => {
+    console.log("Adding...");
     appTasks.addTask(this.arrTasks(), this.state.taskMax, this.reState);
+  };
 
   hideTask = (i) => {
     if (this.currentTask === i)
@@ -145,6 +154,9 @@ class Taskboard extends React.Component {
   };
 
   render() {
+    console.log(
+      "Render with " + this.state.tasks.map((task) => task.description)
+    );
     return (
       <div className="taskboard">
         <div className="totalTimer">

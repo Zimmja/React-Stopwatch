@@ -2,14 +2,7 @@ import React from "react";
 import "./home.css";
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      page: 1,
-    };
-  }
-
-  handleClick = () => this.props.onClick(1);
+  handleClick = () => this.props.onClick();
 
   render() {
     return (
