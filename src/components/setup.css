@@ -1,0 +1,57 @@
+.setupPage {
+  text-align: center;
+  margin: 200px auto;
+  width: 400px;
+  background-color: rgba(255, 255, 255, 0.171);
+  border-radius: 10px;
+  padding: 50px 0 30px;
+}
+
+.setupText {
+  font-weight: bold;
+  font-size: xx-large;
+  margin-right: 10px;
+  color: rgb(52, 107, 98);
+}
+
+.setupInput {
+  height: 82%;
+  padding-left: 15px;
+  border: none;
+  border-radius: 10px;
+  border-color: #000000;
+  color: rgb(52, 107, 98);
+  font-weight: bold;
+  font-size: xx-large;
+  width: 55px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+#setupBase,
+#setupButton {
+  border-radius: 12px;
+  border: none;
+  height: 40px;
+  width: 200px;
+  color: white;
+  font-weight: bold;
+  font-size: large;
+  transform: translateY(-10px);
+}
+
+#setupBase {
+  margin: 40px auto 20px;
+  background-color: rgb(41, 85, 78);
+}
+
+#setupButton {
+  display: block;
+  padding: 8px;
+  background-color: rgb(17, 160, 136);
+  transform: translateY(-10px);
+}
+
+#setupButton:active {
+  transform: translateY(-3px);
+}

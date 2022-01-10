@@ -17,19 +17,22 @@ class Setup extends React.Component {
 
   render() {
     return (
-      <div className="homepage">
+      <div className="setupPage">
+        <span className="setupText">Tasks to start: </span>
         <input
-          className="description"
-          type="text"
+          className="setupInput"
+          type="number"
+          min="1"
+          max="9"
           value={this.state.count}
           onChange={this.updateCount}
         />
-        <div id="startBase">
+        <div id="setupBase">
           <button
-            id="startButton"
+            id="setupButton"
             onClick={() => this.handleClick(this.state.count)}
           >
-            Start with {this.state.count}
+            Create Taskboard
           </button>
         </div>
       </div>
