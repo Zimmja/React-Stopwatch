@@ -21,6 +21,8 @@ class Taskboard extends React.Component {
     };
   }
 
+  // this.props.taskCount is passed in as a property when a Taskboard is rendered
+  // these functions are used to set the intial state properties based on the passed in properties
   setupTasksCount = () => this.props.taskCount;
 
   setupTasks = () => {
@@ -155,7 +157,8 @@ class Taskboard extends React.Component {
 
   render() {
     console.log(
-      "Render with " + this.state.tasks.map((task) => task.description)
+      "Taskboard loaded, rendering tasks:\n" +
+        this.state.tasks.map((task) => task.description)
     );
     return (
       <div className="taskboard">

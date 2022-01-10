@@ -9,6 +9,8 @@ class Setup extends React.Component {
     };
   }
 
+  // this.props.onClick() calls the function passed in from the Apps.js class, i.e. loadTaskboard()
+  // with taskCount passed back to App.js as a property through the loadTaskboard() function
   handleClick = (taskCount) => this.props.onClick(taskCount);
 
   updateCount = (event) => {
@@ -16,6 +18,7 @@ class Setup extends React.Component {
   };
 
   render() {
+    console.log("Setup page loaded");
     return (
       <div className="setupPage">
         <span className="setupText">Tasks to start: </span>
@@ -27,11 +30,8 @@ class Setup extends React.Component {
           value={this.state.count}
           onChange={this.updateCount}
         />
-        <div id="setupBase">
-          <button
-            id="setupButton"
-            onClick={() => this.handleClick(this.state.count)}
-          >
+        <div id="sBase">
+          <button id="sButt" onClick={() => this.handleClick(this.state.count)}>
             Create Taskboard
           </button>
         </div>
