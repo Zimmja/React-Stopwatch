@@ -66,6 +66,12 @@ class App extends React.Component {
   selectTask = (i) =>
     i === this.currentTask ? this.stopTimer() : this.restartTimer(i);
 
+  updateTaskDescription = (i, description) => {
+    const tasksArr = this.arrTasks();
+    tasksArr[i].description = description;
+    this.reState({ tasks: tasksArr });
+  };
+
   // ---------------------------
   // TIMER MANAGEMENT
   // ---------------------------
@@ -101,6 +107,9 @@ class App extends React.Component {
           onSelectClick={(i) => this.selectTask(i)}
           onHideClick={(i) => this.hideTask(i)}
           onResetClick={(i) => this.resetTask(i)}
+          onUpdateDescription={(i, description) =>
+            this.updateTaskDescription(i, description)
+          }
         />
       );
   };

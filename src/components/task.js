@@ -5,13 +5,6 @@ import iconCross from "../media/iconCross.png";
 import iconZero from "../media/iconZero.png";
 
 export default class Task extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      description: this.props.description,
-    };
-  }
-
   handleSWClick = () => this.props.onSelectClick(this.props.index);
 
   handleDClick = () => this.props.onHideClick(this.props.index);
@@ -21,7 +14,7 @@ export default class Task extends React.Component {
   activeState = () => (this.props.active ? "taskActive" : "taskInactive");
 
   updateDescription = (event) => {
-    this.setState({ description: event.target.value });
+    this.props.onUpdateDescription(this.props.index, event.target.value);
   };
 
   render() {
