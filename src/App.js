@@ -8,7 +8,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      taskCount: 3,
+      taskCount: 1,
       page: this.pageHome,
     };
   }

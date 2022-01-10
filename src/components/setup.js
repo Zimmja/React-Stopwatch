@@ -5,7 +5,7 @@ class Setup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 1,
+      count: 3,
     };
   }
 
