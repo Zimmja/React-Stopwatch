@@ -1,0 +1,36 @@
+.homepage {
+  text-align: center;
+  margin: 200px auto;
+  width: 400px;
+  background-color: rgba(255, 255, 255, 0.171);
+  border-radius: 10px;
+  padding: 40px 0;
+}
+
+#startBase,
+#startButton {
+  border-radius: 12px;
+  border: none;
+  height: 80px;
+  width: 200px;
+  color: white;
+  font-weight: bold;
+  font-size: large;
+  transform: translateY(-8px);
+}
+
+#startBase {
+  margin: 40px auto 20px;
+  background-color: rgb(41, 85, 78);
+}
+
+#startButton {
+  display: block;
+  padding: 8px;
+  background-color: rgb(17, 160, 136);
+  transform: translateY(-10px);
+}
+
+#startButton:active {
+  transform: translateY(-3px);
+}
