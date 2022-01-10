@@ -50,6 +50,11 @@ const resetCurrent = (tasksArr, hiddenArr, current, setCurrent) => {
   setCurrent(newCurrent);
 };
 
+const stopTasks = (pause, setCurrent) => {
+  pause();
+  setCurrent(-1);
+};
+
 const appTasks = {
   addTask,
   hideTask,
@@ -57,6 +62,7 @@ const appTasks = {
   resetTask,
   tasksTotal,
   deleteHiddenTasks,
+  stopTasks,
 };
 
 module.exports = appTasks;

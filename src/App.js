@@ -42,8 +42,11 @@ class App extends React.Component {
   addTask = () =>
     appTasks.addTask(this.arrTasks(), this.state.taskMax, this.reState);
 
-  hideTask = (i) =>
+  hideTask = (i) => {
+    if (this.currentTask === i)
+      appTasks.stopTasks(this.pauseTimer, this.setCurrent);
     appTasks.hideTask(i, this.arrTasks(), this.arrHidden(), this.reState);
+  };
 
   deleteHiddenTasks = () => {
     appTasks.deleteHiddenTasks(
