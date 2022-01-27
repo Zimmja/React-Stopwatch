@@ -14,25 +14,28 @@ class Taskboard extends React.Component {
     this.timeInterval = 1000;
     this.currentTask = -1;
     this.state = {
-      tasks: this.setupTasks(),
+      tasks: [
+        { description: "Admin", value: 0, visible: true },
+        { description: "Breaks", value: 0, visible: true },
+      ],
       hidden: [],
-      taskMax: this.setupTasksCount(),
+      taskMax: 2,
       activeLoop: null,
     };
   }
 
   // this.props.taskCount is passed in as a property when a Taskboard is rendered
   // these functions are used to set the intial state properties based on the passed in properties
-  setupTasksCount = () => this.props.taskCount;
+  // setupTasksCount = () => this.props.taskCount;
 
-  setupTasks = () => {
-    const taskCount = this.props.taskCount;
-    const tasks = [];
-    for (let i = 0; i < taskCount; i++) {
-      tasks.push({ description: `Task ${i + 1}`, value: 0, visible: true });
-    }
-    return tasks;
-  };
+  // setupTasks = () => {
+  //   const taskCount = this.props.taskCount;
+  //   const tasks = [];
+  //   for (let i = 0; i < taskCount; i++) {
+  //     tasks.push({ description: `Task ${i + 1}`, value: 0, visible: true });
+  //   }
+  //   return tasks;
+  // };
 
   // ---------------------------
   // STATE MANAGEMENT
