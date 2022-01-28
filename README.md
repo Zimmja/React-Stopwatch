@@ -13,7 +13,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 This project in a work-in-progress. It is not currently hosted online. To use this through a local host:
 
 1. Fork this repository and clone to a local repository
-2. Open the root directory and, from the command-line, run `npm-start` to view in browser
+2. Open the root directory and, from the command-line, run `npm start` to view in browser
 
 ## Interaction
 
